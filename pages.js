@@ -15,10 +15,10 @@
    source.postMessage({type:'moabom:approved',channel,nonce,path:'/moabom/'},event.origin);
   }else if(data.type==='moabom:ready'&&event.source===source&&data.nonce===nonce){clearTimeout(timer);loading.hidden=true;frame.hidden=false;}
  });
- function connect(){
+ function connect(reload=false){
   clearTimeout(timer);source=null;nonce='';loaded=false;loading.hidden=false;retry.hidden=true;frame.hidden=false;status.textContent='모아봄을 불러오고 있습니다.';
-  const target=new URL(APP_URL);target.searchParams.set('embed',channel);target.searchParams.set('moabom_host','github-pages-v1');frame.src=target.href;
+  const target=new URL(APP_URL);target.searchParams.set('embed',channel);target.searchParams.set('moabom_host','github-pages-v1');if(reload||frame.getAttribute('src')!==target.href)frame.src=target.href;
   timer=setTimeout(()=>{if(loaded)return;status.textContent='연결이 지연되고 있습니다.';retry.hidden=false;},20000);
  }
- retry.addEventListener('click',connect);connect();
+ retry.addEventListener('click',()=>connect(true));connect();
 })();
