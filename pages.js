@@ -16,7 +16,7 @@
  });
  function connect(){
   clearTimeout(timer);source=null;nonce='';loading.hidden=false;fallback.hidden=true;retry.hidden=true;frame.hidden=true;status.textContent='학교 보고서 제출함에 연결하고 있습니다.';
-  const target=new URL(APP_URL);target.searchParams.set('embed',channel);frame.src=target.href;
+  const target=new URL(APP_URL);target.searchParams.set('moabom_host','github-pages-v1');frame.src=target.href;
   timer=setTimeout(()=>{status.textContent='앱 연결을 기다리고 있습니다.';fallback.hidden=false;retry.hidden=false;},15000);
  }
  retry.addEventListener('click',connect);connect();
